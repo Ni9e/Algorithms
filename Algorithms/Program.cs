@@ -14,11 +14,11 @@ namespace Algorithms
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            int[] array = { 31, 41, 59, 26, 41, 58 };
+            double[] array = { 4, 9, 23, 1, 45, 27, 5, 2, 31, 41, 59, 26, 41, 58, 14.67 };
             Algorithm.InsertionSort(ref array, SortOrder.ASC);
             for (int i = 0; i < array.Length; i++)
             {
-                Console.Write(array[i] + ",");
+                Console.Write(array[i] + "  ");
             }
 
             sw.Stop();
@@ -34,15 +34,15 @@ namespace Algorithms
         
         // Insertion Sort       
 
-        public static void InsertionSort(ref int[] array, SortOrder order)
-        {           
-            int key = 0,
-                i = 0;
+        public static void InsertionSort(ref double[] array, SortOrder order)
+        {
+            double key = 0;
+            int  i = 0;
             for (int j = 1; j < array.Length; j++)
             {
                 key = array[j];
                 i = j - 1;
-                while (i >= 0 && (order == 0 ? array[i] > key : array[i] < key))
+                while (i >= 0 && (order == SortOrder.ASC ? array[i] > key : array[i] < key))
                 {
                     array[i + 1] = array[i];
                     i--;
