@@ -14,12 +14,7 @@ namespace Algorithms
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            double[] array = { 4, 9, 23, 1, 45, 27, 5, 2, 31, 41, 59, 26, 41, 58, 14.67 };
-            Algorithm.InsertionSort(ref array, SortOrder.ASC);
-            for (int i = 0; i < array.Length; i++)
-            {
-                Console.Write(array[i] + "  ");
-            }
+            TestAlgorithm.TestLineationSearch();
 
             sw.Stop();
             Console.WriteLine();
@@ -32,8 +27,7 @@ namespace Algorithms
     {
         #region Sort
         
-        // Insertion Sort       
-
+        // Insertion Sort
         public static void InsertionSort(ref double[] array, SortOrder order)
         {
             double key = 0;
@@ -53,9 +47,55 @@ namespace Algorithms
 
         #endregion
 
+        #region Search
+
+        // Lineation Search
+        public static int? LineationSearch(int[] array, int val)
+        {
+            int? key = null;
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == val)
+                {
+                    key = i;
+                }
+            }
+            return key;
+        }
+        #endregion
+
         public static int GCD(int a, int b)
         {
             return b == 0 ? a : GCD(b, a % b);
+        }
+    }
+
+    public class TestAlgorithm
+    {
+        public static void TestInsertionSort()
+        {
+            double[] array = { 4, 9, 23, 1, 45, 27, 5, 2, 31, 41, 59, 26, 41, 58, 14.67 };
+            Algorithm.InsertionSort(ref array, SortOrder.ASC);
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.Write(array[i] + " ");
+            }
+        }
+
+        public static void TestLineationSearch()
+        {
+            int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 10 };
+            int val = 10;
+            Console.WriteLine("Search {0}.", val);
+            int? result = Algorithm.LineationSearch(array, val);
+            if (result != null)
+            {
+                Console.WriteLine("Searched at {0} index.", result);
+            }
+            else
+            {
+                Console.WriteLine("Not Found!");
+            }
         }
     }
 
