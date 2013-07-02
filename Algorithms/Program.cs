@@ -14,7 +14,7 @@ namespace Algorithms
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            TestAlgorithm.TestLineationSearch();
+            TestAlgorithm.TestBinaryArrayAdd();
 
             sw.Stop();
             Console.WriteLine();
@@ -64,10 +64,48 @@ namespace Algorithms
         }
         #endregion
 
+        #region Other
+
+        // 2.1-4
+        public static int[] BinaryArrayAdd(int[] A, int[] B)
+        {
+            if (A.Length != B.Length)
+            {
+                throw new Exception("The length of A and B must be equal.");
+            }
+            else
+            {
+                int[] C = new int[A.Length + 1];
+                int add = 0;
+                for (int i = A.Length - 1; i >= 0; i--)
+                {
+                    if (A[i] + B[i] + add == 2)
+                    {
+                        add = 1;
+                        C[i + 1] = 0;
+                    }
+                    else if (A[i] + B[i] + add == 3)
+                    {
+                        add = 1;
+                        C[i + 1] = 1;
+                    }
+                    else
+                    {                        
+                        C[i + 1] = A[i] + B[i] + add;
+                        add = 0;
+                    }
+                }
+                C[0] = add;
+                return C;
+            }
+        }
+
         public static int GCD(int a, int b)
         {
             return b == 0 ? a : GCD(b, a % b);
         }
+        #endregion
+        
     }
 
     public class TestAlgorithm
@@ -95,6 +133,17 @@ namespace Algorithms
             else
             {
                 Console.WriteLine("Not Found!");
+            }
+        }
+
+        public static void TestBinaryArrayAdd()
+        {
+            int[] A = { 1, 1, 1, 1 };
+            int[] B = { 1, 1, 1, 1 };
+            int[] C = Algorithm.BinaryArrayAdd(A, B);            
+            for (int i = 0; i < C.Length; i++)
+            {
+                Console.Write(C[i]);
             }
         }
     }
